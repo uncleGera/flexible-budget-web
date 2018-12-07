@@ -1,0 +1,19 @@
+@import '~assets/styles/variables';
+
+:host {
+  margin: 0 auto;
+}
+
+.set-up {
+  max-width: 600px;
+
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__content {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+  }
+}

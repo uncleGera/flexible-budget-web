@@ -1,0 +1,16 @@
+<header>
+  <mat-toolbar color="primary" class="navbar">
+    <a routerLink="/" class="navbar__logo">Flexible Budget</a>
+
+    <span class="spacer"></span>
+
+    <button [matMenuTriggerFor]="userMenu" mat-icon-button class="ml-xs"><mat-icon>person</mat-icon></button>
+
+    <mat-menu #userMenu="matMenu" x-position="before">
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        Настройки
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</header>

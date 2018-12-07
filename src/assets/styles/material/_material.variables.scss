@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$primary: mat-palette($mat-indigo);
+$accent: mat-palette($mat-amber, A200, A100, A400);
+$warn: mat-palette($mat-red);
+$theme: mat-light-theme($primary, $accent, $warn);
+
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$dark-warn: mat-palette($mat-deep-orange);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+$background: map-get($theme, background);
+$foreground: map-get($theme, foreground);
+$dark-background: map-get($dark-theme, background);
+$dark-foreground: map-get($dark-theme, foreground);
+
+/* stylelint-disable function-parentheses-space-inside */
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Roboto, monospace',
+  $headline: mat-typography-level(24px, 32px, 400),
+  $body-1: mat-typography-level(14px, 20px, 400)
+);
+
+/* stylelint-enable */
+
+$config: mat-typography-config();
+
+@include angular-material-theme($theme);

@@ -1,0 +1,11 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  @include mat-core($custom-typography);
+  color: rgba(mat-color($foreground, base), 0.87);
+  margin: 0;
+  padding: 0;
+}
