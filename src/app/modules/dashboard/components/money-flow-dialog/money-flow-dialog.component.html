@@ -1,0 +1,29 @@
+<div class="dialog_medium">
+  <h2 mat-dialog-title>{{ isEdit ? 'Редактирование' : 'Добавление' }} {{ isIncome ? 'дохода' : 'расхода' }}</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="form" *ngIf="form" (ngSubmit)="onSubmit()">
+      <div class="form__group">
+        <mat-form-field class="form__field">
+          <input matInput placeholder="Описание транзакции" formControlName="description" required autocomplete="off" />
+        </mat-form-field>
+      </div>
+
+      <div class="form__group" *ngIf="!isEdit">
+        <mat-form-field class="form__field">
+          <input matInput type="number" placeholder="Сумма" formControlName="amount" required autocomplete="off" />
+        </mat-form-field>
+      </div>
+
+      <div class="dialog__actions">
+        <button mat-raised-button mat-dialog-close class="dialog__button">Отмена</button>
+
+        <button mat-raised-button class="dialog__button" color="primary">Сохранить</button>
+
+        <button *ngIf="isEdit" class="dialog__button" mat-raised-button color="warn" type="button" (click)="onRemove()">
+          Удалить
+        </button>
+      </div>
+    </form>
+  </mat-dialog-content>
+</div>

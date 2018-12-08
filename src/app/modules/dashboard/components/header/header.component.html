@@ -1,0 +1,57 @@
+<ng-container *ngIf="(period$ | async) as period">
+  <mat-card class="header">
+    <button mat-icon-button><mat-icon>arrow_back</mat-icon></button>
+
+    <div class="header__content">
+      <div class="info">
+        <div class="info__value">Период</div>
+        <div class="info__name">
+          <span>{{ period.since | date: 'dd.MM.yyyy' }}</span> <span> - </span>
+          <span>{{ period.until | date: 'dd.MM.yyyy' }}</span>
+        </div>
+      </div>
+
+      <div class="info">
+        <div class="info__value">{{ period.income }}&nbsp;₽</div>
+        <div class="info__name">Доход</div>
+      </div>
+
+      <div class="info">
+        <div class="info__value">{{ period.dailyBudget }}&nbsp;₽</div>
+        <div class="info__name">Бюджет на день</div>
+      </div>
+
+      <div class="info">
+        <div class="info__value">{{ period.accumulation }}&nbsp;₽</div>
+        <div class="info__name">Накопления</div>
+      </div>
+
+      <div class="info">
+        <div class="info__value">{{ 2500 }}&nbsp;₽</div>
+        <div class="info__name">Остаток</div>
+      </div>
+    </div>
+
+    <button mat-icon-button><mat-icon>arrow_forward</mat-icon></button>
+  </mat-card>
+
+  <div class="tables">
+    <app-money-flows-table
+      title="Доходы"
+      [moneyFlows]="period.incomeMoneyFlows"
+      (add)="addIncome()"
+      (update)="updateIncome($event)"
+      class="tables__item"
+    ></app-money-flows-table>
+
+    <app-money-flows-table
+      title="Обязательные расходы"
+      [moneyFlows]="period.expenditureMoneyFlows"
+      (add)="addExpenditure()"
+      (update)="updateExpenditure($event)"
+      class="tables__item"
+    ></app-money-flows-table>
+  </div>
+</ng-container>
+
+<app-days-table (add)="addExpenditure()" (update)="updateExpenditure($event)"></app-days-table>

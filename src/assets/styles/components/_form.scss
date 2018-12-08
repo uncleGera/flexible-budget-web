@@ -1,0 +1,56 @@
+.form {
+  &_small {
+    max-width: 350px;
+  }
+
+  &_medium {
+    max-width: 500px;
+  }
+
+  &_large {
+    max-width: 700px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+
+    @media #{$material-mobile-screen-max} {
+      flex-direction: column;
+    }
+  }
+
+  &__column {
+    @media #{$material-mobile-screen-min} {
+      &:first-child {
+        margin-right: 16px;
+      }
+    }
+  }
+
+  &__group {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+
+  &__field {
+    width: 100%;
+  }
+
+  &__actions {
+    .form__button {
+      margin-right: 4px;
+    }
+  }
+
+  &__label {
+    margin-bottom: 5px;
+  }
+
+  &__checkbox {
+    display: block;
+    margin-bottom: 24px;
+  }
+}

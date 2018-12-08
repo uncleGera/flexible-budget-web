@@ -1,0 +1,119 @@
+.table {
+  box-sizing: border-box;
+  position: relative;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+  }
+
+  &__footer {
+    align-items: center;
+    display: flex;
+    margin-top: auto;
+    padding: 16px 12px 0;
+  }
+
+  &__total {
+    margin-left: auto;
+  }
+
+  &_small {
+    max-width: 600px;
+  }
+
+  &__row {
+    &_editable {
+      cursor: pointer;
+
+      &:hover {
+        background: $table-background-hover;
+      }
+
+      &:active {
+        background: $table-background-active;
+      }
+    }
+  }
+
+  &__cell {
+    box-sizing: border-box;
+
+    &_space-between {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+
+      .table__action {
+        margin-right: 16px;
+      }
+    }
+
+    &_editable {
+      min-width: 165px;
+      padding-right: 24px !important;
+    }
+
+    &_small {
+      max-width: 70px;
+    }
+
+    &_medium {
+      max-width: 250px;
+    }
+
+    &_large {
+      min-width: 300px;
+    }
+
+    &_extra-large {
+      min-width: 500px;
+    }
+  }
+
+  mat-header-cell,
+  mat-cell {
+    padding: 0 2px;
+  }
+
+  &__content {
+    min-width: 550px;
+
+    &_small {
+      min-width: 350px;
+    }
+
+    &_medium {
+      min-width: 650px;
+    }
+
+    &_large {
+      min-width: 750px;
+    }
+
+    &_exstra-large {
+      min-width: 1050px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 80px;
+    
+    &_large {
+      max-width: 120px;
+    }
+
+    &_small {
+      max-width: 50px;
+    }
+  }
+
+  &__image {
+    height: 32px;
+    min-width: 32px;
+  }
+}

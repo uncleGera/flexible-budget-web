@@ -5,6 +5,6 @@ import { Observable, of } from 'rxjs';
 @Injectable()
 export class SetUpService {
   public save(periods: Moment[]): Observable<any> {
-    return of();
+    return of(null);
   }
 }
