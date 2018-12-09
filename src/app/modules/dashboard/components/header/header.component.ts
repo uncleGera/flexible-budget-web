@@ -29,6 +29,9 @@ export class DashboardHeaderComponent {
   @Select(DashboardState.period)
   public period$: Observable<IPeriod>;
 
+  @Select(DashboardState.hasNextPeriod)
+  public hasNextPeriod$: Observable<boolean>;
+
   @Select(DashboardState.hasPrevPeriod)
   public hasPrevPeriod$: Observable<boolean>;
 

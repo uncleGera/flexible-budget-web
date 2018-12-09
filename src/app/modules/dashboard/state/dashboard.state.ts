@@ -43,12 +43,12 @@ export class DashboardState {
 
   @Selector()
   public static hasNextPeriod({ periods, currentPeriodIndex }: DashboardStateModel) {
-    return !!periods[currentPeriodIndex - 1];
+    return !!periods[currentPeriodIndex + 1];
   }
 
   @Selector()
   public static hasPrevPeriod({ periods, currentPeriodIndex }: DashboardStateModel) {
-    return !!periods[currentPeriodIndex + 1];
+    return !!periods[currentPeriodIndex - 1];
   }
 
   /**
