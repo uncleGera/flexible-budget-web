@@ -1,0 +1,25 @@
+@import '~assets/styles/variables';
+
+.edit-dialog {
+  @media #{$mobile-screen-xs-min} {
+    min-width: 300px;
+  }
+
+  &__backdrop {
+    + .cdk-global-overlay-wrapper {
+      .mat-dialog-container {
+        box-shadow: $card-box-shadow !important;
+        position: relative;
+      }
+    }
+  }
+
+  &__actions {
+    flex-direction: row;
+  }
+
+  &__loader {
+    left: 0;
+    top: 0;
+  }
+}

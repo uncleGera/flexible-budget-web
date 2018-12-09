@@ -57,7 +57,7 @@
     }
 
     &_warn {
-      color: $warn-color;
+      color: $warn-color !important;
     }
 
     &_small {

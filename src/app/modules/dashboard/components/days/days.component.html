@@ -29,7 +29,7 @@
 
       <ng-container matColumnDef="dailyBudget">
         <mat-header-cell *matHeaderCellDef>Бюджет на день</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.dailyBudget }}&nbsp;₽</mat-cell>
+        <mat-cell *matCellDef="let row" [ngClass]="tableCellClassName(row.dailyBudget)">{{ row.dailyBudget }}&nbsp;₽</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="totalCost">
@@ -39,7 +39,7 @@
 
       <ng-container matColumnDef="balance">
         <mat-header-cell *matHeaderCellDef>Сальдо</mat-header-cell>
-        <mat-cell *matCellDef="let row" [ngClass]="balanceClassName(row.balance)">{{ row.balance }}&nbsp;₽</mat-cell>
+        <mat-cell *matCellDef="let row" [ngClass]="tableCellClassName(row.balance)">{{ row.balance }}&nbsp;₽</mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>

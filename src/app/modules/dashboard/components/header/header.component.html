@@ -21,7 +21,7 @@
         <div class="info__name">Бюджет на день</div>
       </div>
 
-      <div class="info">
+      <div class="info info_editable" (click)="openAccumulationDialog($event, period)">
         <div class="info__value">{{ period.accumulation }}&nbsp;₽</div>
         <div class="info__name">Накопления</div>
       </div>

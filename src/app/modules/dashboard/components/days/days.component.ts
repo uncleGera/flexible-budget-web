@@ -48,7 +48,7 @@ export class DaysTableComponent implements AfterViewInit, OnDestroy {
     this.remove.emit(id);
   }
 
-  public balanceClassName(balance: number): { [name: string]: boolean } {
-    return { 'table__cell_warn': balance < 0 };
+  public tableCellClassName(value: number): { [name: string]: boolean } {
+    return { 'table__cell_warn': value < 0 };
   }
 }

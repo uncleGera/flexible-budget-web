@@ -10,7 +10,8 @@ import {
   RemoveMoneyFlow,
   RemovePeriodMoneyFlow,
   UpdateMoneyFlow,
-  UpdatePeriodMoneyFlow
+  UpdatePeriodMoneyFlow,
+  UpdatePeriod
 } from './dashboard.actions';
 import { DashboardStateModel } from './dashboard.model';
 
@@ -51,6 +52,13 @@ export class DashboardState {
     return this.dashboardService
       .get()
       .pipe(tap((periods: IPeriod[]) => ctx.patchState({ periods, period: periods[0] })));
+  }
+
+  @Action(UpdatePeriod)
+  public updatePeriod(ctx: StateContext<DashboardStateModel>, { period }: UpdatePeriod) {
+    return this.dashboardService
+      .updatePeriod(period)
+      .pipe(tap(() => ctx.dispatch(new MoneyFlowOperationSuccess())));
   }
 
   @Action(CreateMoneyFlow)

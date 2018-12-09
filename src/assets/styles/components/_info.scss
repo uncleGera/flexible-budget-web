@@ -1,5 +1,19 @@
 .info {
-  color: #797878;
+  color: #000;
+  opacity: 0.6;
+  transition: opacity $transition-duration;
+
+  &_editable {
+    cursor: pointer;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 1;
+    }
+  }
 
   &__name {
     font-size: 12px;

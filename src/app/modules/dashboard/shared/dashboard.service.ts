@@ -15,6 +15,10 @@ export class DashboardService {
     return this.http.get<{ periods: IPeriod[] }>(`${environment.apiUrl}/periods`).pipe(map(({ periods }) => periods));
   }
 
+  public updatePeriod(period: IPeriod): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/periods/${period.id}`, { period });
+  }
+
   public createMoneyFlow(dayId: number, moneyFlow: IMoneyFlow): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/money_flows`, {
       money_flow: { ...moneyFlow, day_id: dayId }

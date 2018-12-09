@@ -12,9 +12,11 @@ import {
   RemoveMoneyFlow,
   RemovePeriodMoneyFlow,
   UpdateMoneyFlow,
-  UpdatePeriodMoneyFlow
+  UpdatePeriodMoneyFlow,
+  UpdatePeriod
 } from '../../state';
 import { MoneyFlowDialogComponent } from '../money-flow-dialog/money-flow-dialog.component';
+import { EditDialogService } from '@app/ui/edit-dialog/edit-dialog.service';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -25,7 +27,7 @@ export class DashboardHeaderComponent {
   @Select(DashboardState.period)
   public period$: Observable<IPeriod>;
 
-  constructor(private store: Store, private dialog: MatDialog) {}
+  constructor(private store: Store, private dialog: MatDialog, private editDialogService: EditDialogService) {}
 
   public addMoneyFlow(dayId: number) {
     const dialog = this.dialog.open(MoneyFlowDialogComponent, { data: { kind: 'expense' } });
@@ -65,5 +67,18 @@ export class DashboardHeaderComponent {
 
   public removePeriodMoneyFlow(id: number) {
     this.store.dispatch(new RemovePeriodMoneyFlow(id));
+  }
+
+  public openAccumulationDialog($event: any, period: IPeriod) {
+    const data: any = {
+      value: period.accumulation,
+      placeholder: 'Изменить накопления'
+    };
+
+    this.editDialogService.open($event, data);
+
+    this.editDialogService.changes$.subscribe(accumulation => {
+      this.store.dispatch(new UpdatePeriod({ id: period.id, accumulation }));
+    });
   }
 }
