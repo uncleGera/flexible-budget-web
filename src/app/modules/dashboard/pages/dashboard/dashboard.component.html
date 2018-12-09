@@ -1,1 +1,29 @@
-<app-dashboard-header></app-dashboard-header>
+<ng-container *ngIf="(period$ | async) as period">
+  <app-period-info [period]="period"></app-period-info>
+
+  <div class="tables">
+    <app-money-flows-table
+      title="Доходы"
+      [moneyFlows]="period.incomeMoneyFlows"
+      (add)="addPeriodMoneyFlow(period.id, 'income')"
+      (update)="updatePeriodMoneyFlow($event)"
+      (remove)="removePeriodMoneyFlow($event)"
+      class="tables__item"
+    ></app-money-flows-table>
+
+    <app-money-flows-table
+      title="Обязательные расходы"
+      [moneyFlows]="period.expenseMoneyFlows"
+      (add)="addPeriodMoneyFlow(period.id, 'expense')"
+      (update)="updatePeriodMoneyFlow($event)"
+      (remove)="removePeriodMoneyFlow($event)"
+      class="tables__item"
+    ></app-money-flows-table>
+  </div>
+</ng-container>
+
+<app-days-table
+  (add)="addMoneyFlow($event)"
+  (update)="updateMoneyFlow($event)"
+  (remove)="removeMoneyFlow($event)"
+></app-days-table>

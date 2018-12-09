@@ -4,7 +4,7 @@ import { EditDialogModule } from '@app/ui/edit-dialog';
 import { NgxsModule } from '@ngxs/store';
 
 import {
-  DashboardHeaderComponent,
+  PeriodInfoComponent,
   DaysTableComponent,
   MoneyFlowDialogComponent,
   MoneyFlowsTableComponent
@@ -18,7 +18,7 @@ import { DashboardState } from './state';
   imports: [SharedModule, DashboardRoutingModule, NgxsModule.forFeature([DashboardState]), EditDialogModule],
   declarations: [
     DashboardComponent,
-    DashboardHeaderComponent,
+    PeriodInfoComponent,
     MoneyFlowsTableComponent,
     DaysTableComponent,
     MoneyFlowDialogComponent

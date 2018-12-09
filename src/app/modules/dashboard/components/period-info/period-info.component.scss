@@ -1,0 +1,13 @@
+.period-info {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+
+  &__content {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    padding: 12px 48px;
+  }
+}
