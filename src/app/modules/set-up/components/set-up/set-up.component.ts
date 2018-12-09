@@ -24,6 +24,8 @@ export class SetUpComponent implements OnInit {
   }
 
   public save() {
-    this.setUpService.save(this.datePickers.value).subscribe(() => this.router.navigate(['/dashboard']));
+    let params = this.datePickers.value;
+    params = params.map(date => moment(date).utc(true));
+    this.setUpService.save(params).subscribe(() => this.router.navigate(['/dashboard']));
   }
 }
