@@ -56,6 +56,10 @@
       padding-right: 24px !important;
     }
 
+    &_warn {
+      color: $warn-color;
+    }
+
     &_small {
       max-width: 70px;
     }
@@ -69,7 +73,7 @@
     }
 
     &_extra-large {
-      min-width: 500px;
+      min-width: 600px;
     }
   }
 

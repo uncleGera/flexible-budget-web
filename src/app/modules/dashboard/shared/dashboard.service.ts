@@ -1,79 +1,45 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
-import { Observable, of } from 'rxjs';
+import { environment } from '@env/environment';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { IPeriod } from './period.interface';
 import { IMoneyFlow } from '.';
-
-const period: IPeriod = {
-  id: 1,
-  since: moment().toLocaleString(),
-  until: moment()
-    .day(7)
-    .toLocaleString(),
-  days: [
-    {
-      id: 1,
-      date: moment()
-        .day(1)
-        .toLocaleString(),
-      moneyFlows: [],
-      expenditure: 0,
-      dailyBudget: 550 * 1,
-      balance: 550 * 1
-    },
-    {
-      id: 2,
-      date: moment()
-        .day(2)
-        .toLocaleString(),
-      moneyFlows: [],
-      expenditure: 0,
-      dailyBudget: 550 * 2,
-      balance: 550 * 2
-    },
-    {
-      id: 3,
-      date: moment()
-        .day(3)
-        .toLocaleString(),
-      moneyFlows: [],
-      expenditure: 0,
-      dailyBudget: 550 * 3,
-      balance: 550 * 3
-    }
-  ],
-  incomeMoneyFlows: {
-    items: [
-      {
-        id: 1,
-        amount: 5000,
-        description: 'Зарплата'
-      }
-    ],
-    total: 5000
-  },
-  expenditureMoneyFlows: {
-    items: [],
-    total: 0
-  },
-  income: 10000,
-  dailyBudget: 550,
-  accumulation: 0
-};
+import { IPeriod } from './period.interface';
 
 @Injectable()
 export class DashboardService {
-  private period = period;
+  constructor(private http: HttpClient) {}
 
-  public get(id?: number): Observable<IPeriod> {
-    return of(this.period);
+  public get(id?: number): Observable<IPeriod[]> {
+    return this.http.get<{ periods: IPeriod[] }>(`${environment.apiUrl}/periods`).pipe(map(({ periods }) => periods));
   }
 
-  public createMoneyFlow(moneyFlow: IMoneyFlow): Observable<any> {
-    const days = [...this.period.days];
-    days[0] = { ...days[0], moneyFlows: [...days[0].moneyFlows, moneyFlow] };
-    this.period = { ...this.period, days };
-    return of(true);
+  public createMoneyFlow(dayId: number, moneyFlow: IMoneyFlow): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/money_flows`, {
+      money_flow: { ...moneyFlow, day_id: dayId }
+    });
+  }
+
+  public createPeriodMoneyFlow(periodId: number, moneyFlow: IMoneyFlow): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/period_money_flows`, {
+      money_flow: { ...moneyFlow, period_id: periodId }
+    });
+  }
+
+  public updateMoneyFlow(dayId: number, moneyFlow: IMoneyFlow): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/money_flows/${moneyFlow.id}`, { money_flow: { ...moneyFlow } });
+  }
+
+  public updatePeriodMoneyFlow(periodId: number, moneyFlow: IMoneyFlow): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/period_money_flows/${moneyFlow.id}`, { money_flow: { ...moneyFlow } });
+  }
+
+  public removeMoneyFlow(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}/money_flows/${id}`);
+  }
+
+  public removePeriodMoneyFlow(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}/period_money_flows/${id}`);
   }
 }

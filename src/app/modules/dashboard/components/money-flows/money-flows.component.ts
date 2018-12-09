@@ -2,7 +2,8 @@ import { AfterViewInit, Component, Input, OnDestroy, Output, EventEmitter } from
 import { Actions, Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
 
-import { ITableMoneyFlows, IMoneyFlow } from '../../shared';
+import { IMoneyFlow } from '../../shared';
+import { ITableData } from 'libs/models';
 
 @Component({
   selector: 'app-money-flows-table',
@@ -14,7 +15,7 @@ export class MoneyFlowsTableComponent implements AfterViewInit, OnDestroy {
   public title: string;
 
   @Input()
-  public moneyFlows: ITableMoneyFlows;
+  public moneyFlows: ITableData<IMoneyFlow>;
 
   @Output()
   public add: EventEmitter<any> = new EventEmitter();
@@ -22,7 +23,10 @@ export class MoneyFlowsTableComponent implements AfterViewInit, OnDestroy {
   @Output()
   public update: EventEmitter<IMoneyFlow> = new EventEmitter();
 
-  public columnsToDisplay = ['description', 'amount'];
+  @Output()
+  public remove: EventEmitter<number> = new EventEmitter();
+
+  public columnsToDisplay = ['description', 'amount', 'actions'];
 
   private $unsubscribe: Subject<any> = new Subject();
 
@@ -40,5 +44,10 @@ export class MoneyFlowsTableComponent implements AfterViewInit, OnDestroy {
 
   public updateMoneyFlow(moneyFlow: IMoneyFlow) {
     this.update.emit(moneyFlow);
+  }
+
+  public removeMoneyFlow(event: MouseEvent, id: number) {
+    event.stopPropagation();
+    this.remove.emit(id);
   }
 }

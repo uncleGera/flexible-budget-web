@@ -27,7 +27,7 @@
       </div>
 
       <div class="info">
-        <div class="info__value">{{ 2500 }}&nbsp;₽</div>
+        <div class="info__value">{{ period.balance }}&nbsp;₽</div>
         <div class="info__name">Остаток</div>
       </div>
     </div>
@@ -39,19 +39,25 @@
     <app-money-flows-table
       title="Доходы"
       [moneyFlows]="period.incomeMoneyFlows"
-      (add)="addIncome()"
-      (update)="updateIncome($event)"
+      (add)="addPeriodMoneyFlow(period.id, 'income')"
+      (update)="updatePeriodMoneyFlow($event)"
+      (remove)="removePeriodMoneyFlow($event)"
       class="tables__item"
     ></app-money-flows-table>
 
     <app-money-flows-table
       title="Обязательные расходы"
-      [moneyFlows]="period.expenditureMoneyFlows"
-      (add)="addExpenditure()"
-      (update)="updateExpenditure($event)"
+      [moneyFlows]="period.expenseMoneyFlows"
+      (add)="addPeriodMoneyFlow(period.id, 'expense')"
+      (update)="updatePeriodMoneyFlow($event)"
+      (remove)="removePeriodMoneyFlow($event)"
       class="tables__item"
     ></app-money-flows-table>
   </div>
 </ng-container>
 
-<app-days-table (add)="addExpenditure()" (update)="updateExpenditure($event)"></app-days-table>
+<app-days-table
+  (add)="addMoneyFlow($event)"
+  (update)="updateMoneyFlow($event)"
+  (remove)="removeMoneyFlow($event)"
+></app-days-table>

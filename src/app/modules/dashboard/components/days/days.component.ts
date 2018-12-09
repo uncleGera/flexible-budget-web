@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 
 import { IDay, IMoneyFlow } from '../../shared';
 import { DashboardState } from '../../state';
+import { ITableData } from 'libs/models';
 
 @Component({
   selector: 'app-days-table',
@@ -12,18 +13,18 @@ import { DashboardState } from '../../state';
 })
 export class DaysTableComponent implements AfterViewInit, OnDestroy {
   @Select(DashboardState.days)
-  public days$: Observable<IDay[]>;
-
-  @Select(DashboardState.totalExpenses)
-  public total$: Observable<number>;
+  public days$: Observable<ITableData<IDay>>;
 
   @Output()
-  public add: EventEmitter<any> = new EventEmitter();
+  public add: EventEmitter<number> = new EventEmitter();
 
   @Output()
   public update: EventEmitter<IMoneyFlow> = new EventEmitter();
 
-  public columnsToDisplay = ['date', 'moneyFlows', 'dailyBudget', 'totalCost', 'balance', 'actions'];
+  @Output()
+  public remove: EventEmitter<number> = new EventEmitter();
+
+  public columnsToDisplay = ['date', 'moneyFlows', 'dailyBudget', 'totalCost', 'balance'];
 
   private $unsubscribe: Subject<any> = new Subject();
 
@@ -35,11 +36,19 @@ export class DaysTableComponent implements AfterViewInit, OnDestroy {
     this.$unsubscribe.next();
   }
 
-  public addMoneyFlow() {
-    this.add.emit();
+  public addMoneyFlow(dayId: number) {
+    this.add.emit(dayId);
   }
 
   public updateMoneyFlow(moneyFlow: IMoneyFlow) {
     this.update.emit(moneyFlow);
+  }
+
+  public removeMoneyFlow(id: number) {
+    this.remove.emit(id);
+  }
+
+  public balanceClassName(balance: number): { [name: string]: boolean } {
+    return { 'table__cell_warn': balance < 0 };
   }
 }

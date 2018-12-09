@@ -1,19 +1,16 @@
-import { IEntity } from 'libs/models/entity.interface';
-import { IMoneyFlow } from './money-flow.interface';
+import { IEntity, ITableData } from 'libs/models';
+
 import { IDay } from './day.interface';
+import { IMoneyFlow } from './money-flow.interface';
 
 export interface IPeriod extends IEntity {
   since: string;
   until: string;
-  incomeMoneyFlows: ITableMoneyFlows;
-  expenditureMoneyFlows: ITableMoneyFlows;
-  days: IDay[];
+  expenseMoneyFlows: ITableData<IMoneyFlow>;
+  days: ITableData<IDay>;
   income: number;
+  expense: number;
   dailyBudget: number;
   accumulation: number;
-}
-
-export interface ITableMoneyFlows {
-  items: IMoneyFlow[];
-  total: number;
+  balance: number;
 }

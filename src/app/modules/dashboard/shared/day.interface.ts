@@ -1,10 +1,10 @@
 import { IMoneyFlow } from './money-flow.interface';
-import { IEntity } from 'libs/models/entity.interface';
+import { IEntity } from 'libs/models';
 
 export interface IDay extends IEntity {
   date: string;
   moneyFlows: IMoneyFlow[];
-  expenditure: number;
+  expense: number;
   dailyBudget: number;
   balance: number;
 }

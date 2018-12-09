@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Store } from '@ngxs/store';
 
-import { FetchPeriod } from '../state/dashboard.actions';
+import { FetchPeriods } from '../state/dashboard.actions';
 
 @Injectable()
 export class DashboardResolver implements Resolve<any> {
@@ -11,6 +11,6 @@ export class DashboardResolver implements Resolve<any> {
   public resolve(route: ActivatedRouteSnapshot) {
     const id = +route.paramMap.get('id');
 
-    return this.store.dispatch(new FetchPeriod(id || null));
+    return this.store.dispatch(new FetchPeriods(id || null));
   }
 }

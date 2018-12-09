@@ -8,7 +8,14 @@
 
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.amount }}</mat-cell>
+        <mat-cell *matCellDef="let row">{{ row.amount }}&nbsp;₽</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef class="table__actions_small"></mat-header-cell>
+        <mat-cell class="table__actions_small" *matCellDef="let row">
+          <button (click)="removeMoneyFlow($event, row.id)" mat-icon-button><mat-icon>delete</mat-icon></button>
+        </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
@@ -21,9 +28,7 @@
 
     <div class="table__footer">
       <div class="table__footer-action">
-        <button (click)="addMoneyFlow()" mat-icon-button>
-          <mat-icon>add</mat-icon>
-        </button>
+        <button (click)="addMoneyFlow()" mat-icon-button><mat-icon>add</mat-icon></button>
       </div>
 
       <div class="info table__total">
