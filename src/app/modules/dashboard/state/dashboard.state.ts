@@ -9,16 +9,18 @@ import {
   MoneyFlowOperationSuccess,
   RemoveMoneyFlow,
   RemovePeriodMoneyFlow,
+  SetNextPeriod,
+  SetPrevPeriod,
   UpdateMoneyFlow,
-  UpdatePeriodMoneyFlow,
-  UpdatePeriod
+  UpdatePeriod,
+  UpdatePeriodMoneyFlow
 } from './dashboard.actions';
 import { DashboardStateModel } from './dashboard.model';
 
 @State<DashboardStateModel>({
   name: 'dashboard',
   defaults: {
-    period: null,
+    currentPeriodIndex: 0,
     periods: [],
     moneyFlow: null
   }
@@ -30,18 +32,23 @@ export class DashboardState {
    * Selectors
    */
   @Selector()
-  public static period({ periods }: DashboardStateModel) {
-    return periods[0];
+  public static period({ periods, currentPeriodIndex }: DashboardStateModel) {
+    return periods[currentPeriodIndex];
   }
 
   @Selector()
-  public static days({ periods }: DashboardStateModel) {
-    return periods[0].days;
+  public static days({ periods, currentPeriodIndex }: DashboardStateModel) {
+    return periods[currentPeriodIndex].days;
   }
 
   @Selector()
-  public static moneyFlow({ moneyFlow }: DashboardStateModel) {
-    return moneyFlow;
+  public static hasNextPeriod({ periods, currentPeriodIndex }: DashboardStateModel) {
+    return !!periods[currentPeriodIndex - 1];
+  }
+
+  @Selector()
+  public static hasPrevPeriod({ periods, currentPeriodIndex }: DashboardStateModel) {
+    return !!periods[currentPeriodIndex + 1];
   }
 
   /**
@@ -49,16 +56,22 @@ export class DashboardState {
    */
   @Action(FetchPeriods)
   public fetchPeriods(ctx: StateContext<DashboardStateModel>, { id }: FetchPeriods) {
-    return this.dashboardService
-      .get()
-      .pipe(tap((periods: IPeriod[]) => ctx.patchState({ periods, period: periods[0] })));
+    return this.dashboardService.get().pipe(tap((periods: IPeriod[]) => ctx.patchState({ periods })));
   }
 
   @Action(UpdatePeriod)
   public updatePeriod(ctx: StateContext<DashboardStateModel>, { period }: UpdatePeriod) {
-    return this.dashboardService
-      .updatePeriod(period)
-      .pipe(tap(() => ctx.dispatch(new MoneyFlowOperationSuccess())));
+    return this.dashboardService.updatePeriod(period).pipe(tap(() => ctx.dispatch(new MoneyFlowOperationSuccess())));
+  }
+
+  @Action(SetNextPeriod)
+  public setNextPeriod(ctx: StateContext<DashboardStateModel>) {
+    ctx.patchState({ currentPeriodIndex: ctx.getState().currentPeriodIndex + 1 });
+  }
+
+  @Action(SetPrevPeriod)
+  public setPrevPeriod(ctx: StateContext<DashboardStateModel>) {
+    ctx.patchState({ currentPeriodIndex: ctx.getState().currentPeriodIndex - 1 });
   }
 
   @Action(CreateMoneyFlow)
@@ -77,15 +90,17 @@ export class DashboardState {
 
   @Action(UpdateMoneyFlow)
   public updateMoneyFlow(ctx: StateContext<DashboardStateModel>, { moneyFlow }: UpdateMoneyFlow) {
+    const { periods, currentPeriodIndex } = ctx.getState();
     return this.dashboardService
-      .updateMoneyFlow(ctx.getState().period.id, moneyFlow)
+      .updateMoneyFlow(periods[currentPeriodIndex].id, moneyFlow)
       .pipe(tap(() => ctx.dispatch(new MoneyFlowOperationSuccess())));
   }
 
   @Action(UpdatePeriodMoneyFlow)
   public updatePeriodMoneyFlow(ctx: StateContext<DashboardStateModel>, { moneyFlow }: UpdatePeriodMoneyFlow) {
+    const { periods, currentPeriodIndex } = ctx.getState();
     return this.dashboardService
-      .updatePeriodMoneyFlow(ctx.getState().period.id, moneyFlow)
+      .updatePeriodMoneyFlow(periods[currentPeriodIndex].id, moneyFlow)
       .pipe(tap(() => ctx.dispatch(new MoneyFlowOperationSuccess())));
   }
 

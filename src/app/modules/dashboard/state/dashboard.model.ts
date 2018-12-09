@@ -1,7 +1,7 @@
 import { IPeriod, IMoneyFlow } from '../shared';
 
 export interface DashboardStateModel {
-  period: IPeriod;
   periods: IPeriod[];
+  currentPeriodIndex: number;
   moneyFlow: IMoneyFlow;
 }

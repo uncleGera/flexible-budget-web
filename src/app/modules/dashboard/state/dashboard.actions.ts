@@ -11,9 +11,12 @@ export class UpdatePeriod {
   constructor(public readonly period: any) {}
 }
 
-export class FetchMoneyFlow {
-  public static readonly type = '[Dashboard] FetchMoneyFlow';
-  constructor(public readonly id: number) {}
+export class SetNextPeriod {
+  public static readonly type = '[Dashboard] SetNextPeriod';
+}
+
+export class SetPrevPeriod {
+  public static readonly type = '[Dashboard] SetPrevPeriod';
 }
 
 export class CreateMoneyFlow {
@@ -27,7 +30,7 @@ export class UpdateMoneyFlow {
 }
 
 export class RemoveMoneyFlow {
-  public static readonly type = '[Dashboard] FetchMoneyFlow';
+  public static readonly type = '[Dashboard] RemoveMoneyFlow';
   constructor(public readonly id: number) {}
 }
 
@@ -47,7 +50,7 @@ export class UpdatePeriodMoneyFlow {
 }
 
 export class RemovePeriodMoneyFlow {
-  public static readonly type = '[Dashboard] FetchPeriodMoneyFlow';
+  public static readonly type = '[Dashboard] RemovePeriodMoneyFlow';
   constructor(public readonly id: number) {}
 }
 

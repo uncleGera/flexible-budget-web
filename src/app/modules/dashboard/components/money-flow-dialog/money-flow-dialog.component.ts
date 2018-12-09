@@ -12,9 +12,6 @@ import { DashboardState } from '../../state';
   templateUrl: './money-flow-dialog.component.html'
 })
 export class MoneyFlowDialogComponent implements OnInit, OnDestroy {
-  @Select(DashboardState.moneyFlow)
-  public moneyFlow$: Observable<IMoneyFlow>;
-
   public form: FormGroup;
   public isEdit = false;
 

@@ -1,6 +1,8 @@
 <ng-container *ngIf="(period$ | async) as period">
   <mat-card class="header">
-    <button mat-icon-button><mat-icon>arrow_back</mat-icon></button>
+    <button mat-icon-button (click)="prevPeriod()" [disabled]="hasPrevPeriod$ | async">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
 
     <div class="header__content">
       <div class="info">
@@ -32,7 +34,9 @@
       </div>
     </div>
 
-    <button mat-icon-button><mat-icon>arrow_forward</mat-icon></button>
+    <button mat-icon-button (click)="nextPeriod()">
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
   </mat-card>
 
   <div class="tables">

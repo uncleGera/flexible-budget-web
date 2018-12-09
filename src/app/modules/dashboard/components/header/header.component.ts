@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { EditDialogService } from '@app/ui/edit-dialog/edit-dialog.service';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -11,12 +12,13 @@ import {
   DashboardState,
   RemoveMoneyFlow,
   RemovePeriodMoneyFlow,
+  SetNextPeriod,
+  SetPrevPeriod,
   UpdateMoneyFlow,
-  UpdatePeriodMoneyFlow,
-  UpdatePeriod
+  UpdatePeriod,
+  UpdatePeriodMoneyFlow
 } from '../../state';
 import { MoneyFlowDialogComponent } from '../money-flow-dialog/money-flow-dialog.component';
-import { EditDialogService } from '@app/ui/edit-dialog/edit-dialog.service';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -26,6 +28,9 @@ import { EditDialogService } from '@app/ui/edit-dialog/edit-dialog.service';
 export class DashboardHeaderComponent {
   @Select(DashboardState.period)
   public period$: Observable<IPeriod>;
+
+  @Select(DashboardState.hasPrevPeriod)
+  public hasPrevPeriod$: Observable<boolean>;
 
   constructor(private store: Store, private dialog: MatDialog, private editDialogService: EditDialogService) {}
 
@@ -80,5 +85,13 @@ export class DashboardHeaderComponent {
     this.editDialogService.changes$.subscribe(accumulation => {
       this.store.dispatch(new UpdatePeriod({ id: period.id, accumulation }));
     });
+  }
+
+  public nextPeriod() {
+    this.store.dispatch(new SetNextPeriod());
+  }
+
+  public prevPeriod() {
+    this.store.dispatch(new SetPrevPeriod());
   }
 }
