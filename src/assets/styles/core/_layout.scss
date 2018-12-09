@@ -1,6 +1,9 @@
 .layout {
-  height: 100%;
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 32px;
+  height: calc(100% - 56px);
+
+  &__wrapper {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 32px;
+  }
 }
