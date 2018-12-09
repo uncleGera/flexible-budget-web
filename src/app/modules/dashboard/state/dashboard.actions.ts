@@ -3,7 +3,6 @@ import { IMoneyFlow, IPeriod } from '../shared';
 // Actions
 export class FetchPeriods {
   public static readonly type = '[Dashboard] FetchPeriods';
-  constructor(public readonly id?: number) {}
 }
 
 export class UpdatePeriod {

@@ -9,8 +9,6 @@ export class DashboardResolver implements Resolve<any> {
   constructor(private store: Store) {}
 
   public resolve(route: ActivatedRouteSnapshot) {
-    const id = +route.paramMap.get('id');
-
-    return this.store.dispatch(new FetchPeriods(id || null));
+    return this.store.dispatch(new FetchPeriods());
   }
 }

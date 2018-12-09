@@ -3,15 +3,10 @@ import { SharedModule } from '@app/shared/shared.module';
 import { EditDialogModule } from '@app/ui/edit-dialog';
 import { NgxsModule } from '@ngxs/store';
 
-import {
-  PeriodInfoComponent,
-  DaysTableComponent,
-  MoneyFlowDialogComponent,
-  MoneyFlowsTableComponent
-} from './components';
+import { DaysTableComponent, MoneyFlowDialogComponent, MoneyFlowsTableComponent, PeriodInfoComponent } from './components';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './pages';
-import { DashboardResolver, DashboardService } from './shared';
+import { DashboardResolver, MoneyFlowsService, PeriodMoneyFlowsService, PeriodsService } from './shared';
 import { DashboardState } from './state';
 
 @NgModule({
@@ -23,7 +18,7 @@ import { DashboardState } from './state';
     DaysTableComponent,
     MoneyFlowDialogComponent
   ],
-  providers: [DashboardService, DashboardResolver],
+  providers: [DashboardResolver, PeriodsService, MoneyFlowsService, PeriodMoneyFlowsService],
   entryComponents: [MoneyFlowDialogComponent]
 })
 export class DashboardModule {}
