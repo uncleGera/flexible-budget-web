@@ -9,7 +9,7 @@
       <ng-container matColumnDef="moneyFlows">
         <mat-header-cell *matHeaderCellDef class="table__cell_extra-large">Расходы</mat-header-cell>
         <mat-cell *matCellDef="let row" class="table__cell_extra-large">
-          <button (click)="addMoneyFlow(row.id)" mat-icon-button class="money-flow__add-button">
+          <button (click)="addMoneyFlow(row.id)" mat-icon-button color="accent" class="money-flow__add-button">
             <mat-icon>add</mat-icon>
           </button>
 
@@ -18,6 +18,8 @@
               class="days__money-flow money-flow"
               (click)="updateMoneyFlow(moneyFlow)"
               (removed)="removeMoneyFlow(moneyFlow.id)"
+              color="accent"
+              selected
             >
               <div class="money-flow__description">{{ moneyFlow.description }}</div>
               <div class="money-flow__amount">-{{ moneyFlow.amount }}&nbsp;₽</div>

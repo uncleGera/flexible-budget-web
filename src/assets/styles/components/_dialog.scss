@@ -11,6 +11,10 @@
     }
   }
 
+  &__title {
+    color: $accent-color;
+  }
+
   &__actions {
     display: flex;
     justify-content: flex-end;

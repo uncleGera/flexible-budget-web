@@ -1,0 +1,11 @@
+.mat-sidenav-container {
+  background: #f5f5f5;
+}
+
+.mat-cell {
+  color: $accent-color !important;
+}
+
+.mat-header-cell {
+  color: transparentize($accent-color, 0.3) !important;
+}

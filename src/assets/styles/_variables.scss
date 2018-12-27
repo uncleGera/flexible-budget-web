@@ -7,8 +7,8 @@ $primary-color: mat-color($primary);
 $accent-color: mat-color($accent);
 $warn-color: mat-color($warn);
 
-$table-background-hover: #f5f5f5;
-$table-background-active: #eee;
+$table-background-hover: rgba(178, 223, 219, 0.2);
+$table-background-active: rgba(178, 223, 219, 0.4);
 
 ///////////////////////
 // Effects

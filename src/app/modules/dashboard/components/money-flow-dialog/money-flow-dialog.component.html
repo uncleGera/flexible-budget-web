@@ -1,5 +1,5 @@
 <div class="dialog_medium">
-  <h2 mat-dialog-title>{{ isEdit ? 'Редактирование' : 'Добавление' }} {{ kind() }}</h2>
+  <h2 mat-dialog-title color="accent" class="dialog__title">{{ isEdit ? 'Редактирование' : 'Добавление' }} {{ kind() }}</h2>
 
   <mat-dialog-content>
     <form [formGroup]="form" *ngIf="form" (ngSubmit)="onSubmit()">

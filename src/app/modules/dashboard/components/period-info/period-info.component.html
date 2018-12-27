@@ -1,5 +1,5 @@
 <mat-card class="period-info">
-  <button mat-icon-button (click)="prevPeriod()" [disabled]="!(hasPrevPeriod$ | async)">
+  <button mat-icon-button color="primary" (click)="prevPeriod()" [disabled]="!(hasPrevPeriod$ | async)">
     <mat-icon>arrow_back</mat-icon>
   </button>
 
@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  <button mat-icon-button (click)="nextPeriod()" [disabled]="!(hasNextPeriod$ | async)">
+  <button mat-icon-button color="primary" (click)="nextPeriod()" [disabled]="!(hasNextPeriod$ | async)">
     <mat-icon>arrow_forward</mat-icon>
   </button>
 </mat-card>
