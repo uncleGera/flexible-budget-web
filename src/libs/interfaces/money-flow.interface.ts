@@ -1,4 +1,4 @@
-import { IEntity } from 'libs/models';
+import { IEntity } from './entity.interface';
 
 export interface IMoneyFlow extends IEntity {
   amount: number;

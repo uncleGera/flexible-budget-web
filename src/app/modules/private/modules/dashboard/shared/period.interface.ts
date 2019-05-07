@@ -1,7 +1,6 @@
-import { IEntity, ITableData } from 'libs/models';
+import { IEntity, IMoneyFlow, ITableData } from 'libs/interfaces';
 
 import { IDay } from './day.interface';
-import { IMoneyFlow } from './money-flow.interface';
 
 export interface IPeriod extends IEntity {
   since: string;

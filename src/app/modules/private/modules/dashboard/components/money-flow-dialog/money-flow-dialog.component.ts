@@ -1,11 +1,8 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Select } from '@ngxs/store';
-import { Observable, Subject } from 'rxjs';
-
-import { IMoneyFlow } from '../../shared';
-import { DashboardState } from '../../state';
+import { IMoneyFlow } from 'libs/interfaces';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-money-flow-dialog',

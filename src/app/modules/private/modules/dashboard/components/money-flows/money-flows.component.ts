@@ -1,9 +1,7 @@
-import { AfterViewInit, Component, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Actions, Store } from '@ngxs/store';
+import { IMoneyFlow, ITableData } from 'libs/interfaces';
 import { Subject } from 'rxjs';
-
-import { IMoneyFlow } from '../../shared';
-import { ITableData } from 'libs/models';
 
 @Component({
   selector: 'app-money-flows-table',

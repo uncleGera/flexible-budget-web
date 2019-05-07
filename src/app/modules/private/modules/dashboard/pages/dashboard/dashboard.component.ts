@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Select, Store } from '@ngxs/store';
+import { IMoneyFlow } from 'libs/interfaces';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { MoneyFlowDialogComponent } from '../../components';
-import { IMoneyFlow, IPeriod } from '../../shared';
+import { IPeriod } from '../../shared';
 import {
   CreateMoneyFlow,
   CreatePeriodMoneyFlow,

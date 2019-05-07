@@ -1,4 +1,4 @@
-import { IMoneyFlow, IPeriod } from '../shared';
+import { IMoneyFlow } from 'libs/interfaces';
 
 // Actions
 export class FetchPeriods {

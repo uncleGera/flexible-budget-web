@@ -7,7 +7,7 @@
     <button [matMenuTriggerFor]="userMenu" mat-icon-button class="ml-xs"><mat-icon>person</mat-icon></button>
 
     <mat-menu #userMenu="matMenu" x-position="before">
-      <button mat-menu-item>
+      <button mat-menu-item [routerLink]="['/settings']">
         <mat-icon>settings</mat-icon>
         Настройки
       </button>

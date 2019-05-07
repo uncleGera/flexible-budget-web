@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { Actions, Select, Store } from '@ngxs/store';
+import { IMoneyFlow, ITableData } from 'libs/interfaces';
 import { Observable, Subject } from 'rxjs';
 
-import { IDay, IMoneyFlow } from '../../shared';
+import { IDay } from '../../shared';
 import { DashboardState } from '../../state';
-import { ITableData } from 'libs/models';
 
 @Component({
   selector: 'app-days-table',
@@ -49,6 +49,6 @@ export class DaysTableComponent implements AfterViewInit, OnDestroy {
   }
 
   public tableCellClassName(value: number): { [name: string]: boolean } {
-    return { 'table__cell_warn': value < 0 };
+    return { table__cell_warn: value < 0 };
   }
 }
