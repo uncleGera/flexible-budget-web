@@ -4,6 +4,10 @@
   &__wrapper {
     margin: 0 auto;
     max-width: 1200px;
-    padding: 32px;
+    padding: 32px 16px;
+
+    @media #{$mobile-screen-md-min} {
+      padding: 32px;
+    }
   }
 }

@@ -29,7 +29,8 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatRippleModule
 } from '@angular/material';
 
 import { TranslatablePaginator } from './translatable-paginator.service';
@@ -63,7 +64,8 @@ const MODULES = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatExpansionModule,
-  MatRadioModule
+  MatRadioModule,
+  MatRippleModule
 ];
 
 @NgModule({

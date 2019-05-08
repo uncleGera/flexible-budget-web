@@ -1,20 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { Select } from '@ngxs/store';
+import { Component } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
 import { ISettingsDay } from '../../shared';
-import { SettingsState } from '../../state';
+import { SelectDay, SetHoveredDay, SettingsState } from '../../state';
 
 @Component({
   selector: 'app-periods-settings',
   templateUrl: './periods.component.html',
   styleUrls: ['./periods.component.scss']
 })
-export class PeriodsSettingsComponent implements OnInit {
+export class PeriodsSettingsComponent {
   @Select(SettingsState.days)
   public days$: Observable<ISettingsDay[]>;
 
-  public ngOnInit() {
-    this.days$.subscribe(); // TODO: remove
+  constructor(private store: Store) {}
+
+  public dayClassNames(day: ISettingsDay): string[] {
+    return [
+      'settings__day',
+      day.color ? `settings__day_${day.color}` : '',
+      day.selected ? 'settings__day_selected' : '',
+      day.isFirst ? 'settings__day_first' : '',
+      day.isLast ? 'settings__day_last' : '',
+      day.hovered ? 'settings__day_hovered' : ''
+    ];
+  }
+
+  public setHoveredDay(day: number) {
+    this.store.dispatch(new SetHoveredDay(day));
+  }
+
+  public onDaySelected({ dayNumber }: ISettingsDay) {
+    this.store.dispatch(new SelectDay(dayNumber));
   }
 }
