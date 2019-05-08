@@ -3,7 +3,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
 import { ISettingsDay } from '../../shared';
-import { SelectDay, SetHoveredDay, SettingsState } from '../../state';
+import { SelectDay, SetHover, SettingsState } from '../../state';
 
 @Component({
   selector: 'app-periods-settings',
@@ -23,15 +23,15 @@ export class PeriodsSettingsComponent {
       day.selected ? 'settings__day_selected' : '',
       day.isFirst ? 'settings__day_first' : '',
       day.isLast ? 'settings__day_last' : '',
-      day.hovered ? 'settings__day_hovered' : ''
+      day.hovered ? 'hover' : ''
     ];
   }
 
-  public setHoveredDay(day: number) {
-    this.store.dispatch(new SetHoveredDay(day));
+  public SetHover(day: ISettingsDay) {
+    this.store.dispatch(new SetHover(day));
   }
 
-  public onDaySelected({ dayNumber }: ISettingsDay) {
-    this.store.dispatch(new SelectDay(dayNumber));
+  public onDaySelected(day: ISettingsDay) {
+    this.store.dispatch(new SelectDay(day));
   }
 }
