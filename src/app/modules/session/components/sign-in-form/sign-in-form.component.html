@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="session__form-field">
+    <mat-label>Email</mat-label>
+
+    <input matInput placeholder="Введите Email" type="email" formControlName="email" />
+
+    <mat-error *ngIf="form.get('email').hasError('required')" class="mat-text-warn">
+      Пожалуйста, введите Email
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="session__form-field">
+    <mat-label>Пароль</mat-label>
+
+    <input matInput type="password" placeholder="Введите пароль" formControlName="password" />
+
+    <mat-error *ngIf="form.get('password').hasError('required')" class="mat-text-warn">
+      Пожалуйста, введите пароль
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-flat-button type="submit" color="primary" [disabled]="loading" class="button">
+    Войти
+  </button>
+</form>

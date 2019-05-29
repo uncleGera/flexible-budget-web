@@ -1,0 +1,12 @@
+.card {
+  &_with-loader {
+    overflow: hidden;
+
+    &:before {
+      background: $primary-color;
+      content: '';
+      height: 3px;
+      position: absolute;
+    }
+  }
+}

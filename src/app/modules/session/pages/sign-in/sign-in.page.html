@@ -1,0 +1,9 @@
+<div class="session">
+  <mat-card class="card card_with-loader session__content">
+    <mat-progress-bar class="loader loader_absolute" *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
+
+    <mat-card-content>
+      <app-sign-in-form [loading]="loading$ | async" (submitted)="onSubmit($event)"></app-sign-in-form>
+    </mat-card-content>
+  </mat-card>
+</div>

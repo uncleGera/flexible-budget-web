@@ -1,0 +1,10 @@
+.loader {
+  height: 3px !important;
+
+  &_absolute {
+    left: 0;
+    position: absolute !important;
+    top: 0;
+    z-index: 1000;
+  }
+}

@@ -321,21 +321,31 @@
     tree-kill "1.2.0"
     webpack-sources "1.2.0"
 
-"@ngxs/devtools-plugin@^3.3.2":
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/@ngxs/devtools-plugin/-/devtools-plugin-3.3.2.tgz#291dacc6a0f8bc67ae43c22e71cdb92af3ba7a14"
+"@ngxs/devtools-plugin@^3.3.1":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@ngxs/devtools-plugin/-/devtools-plugin-3.4.3.tgz#437e8599d24babee2c08cdd93a789585248a1a5c"
+  integrity sha512-bbfTDQtc+5/ZpRvWj1xttzasU70hAVCaMcf+RNrfpei+IiROK/YvVNBhb1XovTQdQtYG4RnzMvA3YAB/wIaTBA==
   dependencies:
     tslib "^1.9.0"
 
-"@ngxs/router-plugin@^3.3.2":
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/@ngxs/router-plugin/-/router-plugin-3.3.2.tgz#33b5a9c1b2b4a60376060b23f863bfe597c213e1"
+"@ngxs/router-plugin@^3.3.1":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@ngxs/router-plugin/-/router-plugin-3.4.3.tgz#60cea34d7165053bee2454b2baa57f6fc9af6975"
+  integrity sha512-DsWh5h9P8PGcgQbYEhbsozkoa/LpMH+v/JV+GMHraTV5rBKWn7kp0vaKszOoEcaoP9x1Gy+bUfvnJpbvZ/CEUw==
   dependencies:
     tslib "^1.9.0"
 
-"@ngxs/store@^3.3.2":
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/@ngxs/store/-/store-3.3.2.tgz#dab346353a7f8a8f6f055be7c11a6785347ca1b9"
+"@ngxs/storage-plugin@^3.3.1":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@ngxs/storage-plugin/-/storage-plugin-3.4.3.tgz#f9cd20f544fd8d61b8c260121eebc26c0d682010"
+  integrity sha512-TaRwO2BpMtCN2q/LQYs+J5cXIxBl0B5W05+gG8j+w5YpDWgJvGvFQjIAE2JnZMKGIILCmM59DX9rLyCoCthdKw==
+  dependencies:
+    tslib "^1.9.0"
+
+"@ngxs/store@^3.3.1":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@ngxs/store/-/store-3.4.3.tgz#cf2f3b95e6be814742754c7f24e53b2b6392bb47"
+  integrity sha512-pVwxFxCxr09+zL37ot1hf6EhgpftNLSAseBZwHUlx40x2qAT+jat8XJlj4j0p+BoVEjlaVZn8zE6qMm2oSPlZw==
   dependencies:
     tslib "^1.9.0"
 

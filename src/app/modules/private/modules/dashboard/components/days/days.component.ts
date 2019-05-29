@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { Actions, Select, Store } from '@ngxs/store';
-import { IMoneyFlow, ITableData } from 'libs/interfaces';
+import { IMoneyFlow, ITableData } from '@lib/interfaces';
 import { Observable, Subject } from 'rxjs';
 
 import { IDay } from '../../shared';

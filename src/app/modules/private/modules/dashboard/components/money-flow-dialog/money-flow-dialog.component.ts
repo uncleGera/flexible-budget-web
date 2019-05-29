@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { IMoneyFlow } from 'libs/interfaces';
+import { IMoneyFlow } from '@lib/interfaces';
 import { Subject } from 'rxjs';
 
 @Component({

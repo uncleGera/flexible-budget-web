@@ -1,4 +1,4 @@
-import { IEntity, IMoneyFlow } from 'libs/interfaces';
+import { IEntity, IMoneyFlow } from '@lib/interfaces';
 
 export interface IDay extends IEntity {
   date: string;

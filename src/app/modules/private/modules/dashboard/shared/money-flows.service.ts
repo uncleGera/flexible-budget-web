@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { IMoneyFlow } from 'libs/interfaces';
+import { IMoneyFlow } from '@lib/interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable()

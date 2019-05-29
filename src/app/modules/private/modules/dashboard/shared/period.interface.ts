@@ -1,4 +1,4 @@
-import { IEntity, IMoneyFlow, ITableData } from 'libs/interfaces';
+import { IEntity, IMoneyFlow, ITableData } from '@lib/interfaces';
 
 import { IDay } from './day.interface';
 

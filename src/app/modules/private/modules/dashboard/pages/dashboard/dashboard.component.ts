@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Select, Store } from '@ngxs/store';
-import { IMoneyFlow } from 'libs/interfaces';
+import { IMoneyFlow } from '@lib/interfaces';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 

@@ -1,4 +1,4 @@
-import { IMoneyFlow } from 'libs/interfaces';
+import { IMoneyFlow } from '@lib/interfaces';
 
 import { IPeriod } from '../shared';
 

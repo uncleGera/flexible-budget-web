@@ -1,4 +1,4 @@
-import { IMoneyFlow } from 'libs/interfaces';
+import { IMoneyFlow } from '@lib/interfaces';
 
 export interface ISettingsPeriod {
   startDay: number;
