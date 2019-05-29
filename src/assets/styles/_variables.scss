@@ -7,6 +7,28 @@ $primary-color: mat-color($primary);
 $accent-color: mat-color($accent);
 $warn-color: mat-color($warn);
 
+$primary-color-lighten: #33cbba;
+$primary-color-lightest: #5bcbbf;
+$primary-color-darken: #1c7168;
+$primary-color-darkest: #006257;
+
+$secondary-color: #1043a0;
+$secondary-color-lighten: #4375d0;
+$secondary-color-lightest: #698dd0;
+$secondary-color-darken: #274478;
+$secondary-color-darkest: #052868;
+
+$tertiary-color: #f88d3e;
+$tertiary-color-lighten: #f8b73e;
+$tertiary-color-lightest: #f8c870;
+$tertiary-color-darken: #b5852d;
+$tertiary-color-darkest: #9d6600;
+
+$gray: #7a7a7a;
+$light-gray: #c4c4c4;
+$lightest-gray: #f5f5f5;
+$dark-gray: #4f4f4f;
+
 $table-background-hover: rgba(178, 223, 219, 0.2);
 $table-background-active: rgba(178, 223, 219, 0.4);
 

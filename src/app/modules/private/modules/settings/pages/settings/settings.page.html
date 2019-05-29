@@ -1,0 +1,16 @@
+<mat-card class="settings">
+  <mat-card-title>
+    <h1>Настройки</h1>
+  </mat-card-title>
+
+  <mat-card-subtitle>
+    Пожалуйста, создайте один или несколько отчетных периодов, выберав поочередно даты начала и окончания.
+    Затем кликните по каждому периоду и введите доходы и расходы.
+  </mat-card-subtitle>
+
+  <app-periods-calendar
+    [days]="days$ | async"
+    (hoverActivated)="setHover($event)"
+    (daySelected)="onDaySelected($event)"
+  ></app-periods-calendar>
+</mat-card>

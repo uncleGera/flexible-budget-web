@@ -10,11 +10,15 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: '../set-up/set-up.module#SetUpModule'
+        loadChildren: './modules/set-up/set-up.module#SetUpModule'
+      },
+      {
+        path: 'settings',
+        loadChildren: './modules/settings/settings.module#SettingsModule'
       },
       {
         path: 'dashboard',
-        loadChildren: '../dashboard/dashboard.module#DashboardModule'
+        loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
       }
     ]
   }
