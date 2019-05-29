@@ -1,0 +1,11 @@
+<div class="calendar">
+  <div
+    *ngFor="let day of days"
+    [ngClass]="dayClassNames(day)"
+    (mouseenter)="setHover(day)"
+    (mouseleave)="setHover(null)"
+    (click)="onDaySelected(day)"
+  >
+    {{ day.dayNumber }}
+  </div>
+</div>

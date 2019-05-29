@@ -1,1 +1,1 @@
-export { PeriodsSettingsComponent } from './periods/periods.component';
+export { PeriodsCalendarComponent } from './periods-calendar/periods-calendar.component';

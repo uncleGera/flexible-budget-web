@@ -2,7 +2,7 @@ import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
 import produce from 'immer';
 import { tap } from 'rxjs/operators';
 
-import { DAY_COLORS, ISettingsDay, ISettingsPeriod, SettingsService } from '../shared';
+import { ISettingsDay, ISettingsPeriod, SettingsService } from '../shared';
 import { FetchPeriod, SelectDay, SetHover } from './settings.actions';
 import { SettingsStateModel } from './settings.model';
 
@@ -21,7 +21,6 @@ export class SettingsState implements NgxsOnInit {
    */
   @Selector()
   public static days({ days }: SettingsStateModel): ISettingsDay[] {
-    // console.log(days);
     return days;
   }
 
@@ -48,8 +47,6 @@ export class SettingsState implements NgxsOnInit {
           }
         } else {
           periods.forEach(({ startDay, endDay }: ISettingsPeriod, periodIndex) => {
-            colorIndex = colorIndex === DAY_COLORS.length - 1 ? 0 : colorIndex;
-
             if (periodIndex === 0 && startDay > 1) {
               for (let i = 1; i < startDay; i++) {
                 days = [...days, { dayNumber: i }];
@@ -64,8 +61,7 @@ export class SettingsState implements NgxsOnInit {
                   periodIndex,
                   isFirst: i === startDay,
                   isLast: i === endDay,
-                  selected: true,
-                  color: DAY_COLORS[colorIndex]
+                  selected: true
                 }
               ];
             }
@@ -95,15 +91,67 @@ export class SettingsState implements NgxsOnInit {
 
   @Action(SetHover)
   public setHover(ctx: StateContext<SettingsStateModel>, { day }: SetHover) {
-    const { days } = ctx.getState();
+    const { days, periods } = ctx.getState();
 
     const newDays = produce(days, draft => {
+      const lastPeriod = periods[periods.length - 1];
+      const uncompletedPeriod = lastPeriod && !lastPeriod.endDay ? lastPeriod : null;
+
       for (let i = 0; i < draft.length; i++) {
-        const hovered =
-          day &&
-          (((day.periodIndex === 0 || !!day.periodIndex) && day.periodIndex === draft[i].periodIndex) ||
-            day.dayNumber === draft[i].dayNumber);
-        draft[i].hovered = hovered;
+        if (day && !uncompletedPeriod) {
+          const filled =
+            ((day.periodIndex === 0 || !!day.periodIndex) && day.periodIndex === draft[i].periodIndex) ||
+            day.dayNumber === draft[i].dayNumber;
+
+          draft[i].filled = filled;
+        }
+
+        if (day && uncompletedPeriod) {
+          let sortedPeriods = [...periods];
+          sortedPeriods = sortedPeriods.sort((period, comparedPeriod) =>
+            period.startDay > comparedPeriod.startDay ? 1 : -1
+          );
+
+          const latePeriod = sortedPeriods.find(({ startDay }) => startDay > uncompletedPeriod.startDay);
+
+          let filled: boolean;
+          let isLast: boolean;
+
+          if (latePeriod && day.dayNumber > uncompletedPeriod.startDay) {
+            filled =
+              draft[i].dayNumber > uncompletedPeriod.startDay &&
+              draft[i].dayNumber <= day.dayNumber &&
+              draft[i].dayNumber < latePeriod.startDay;
+
+            isLast =
+              day.dayNumber === draft[i].dayNumber ||
+              (draft[i].dayNumber === latePeriod.startDay - 1 && day.dayNumber >= latePeriod.startDay);
+          } else if (latePeriod && day.dayNumber < uncompletedPeriod.startDay) {
+            filled = draft[i].dayNumber > uncompletedPeriod.startDay && draft[i].dayNumber < latePeriod.startDay;
+
+            isLast =
+              day.dayNumber === draft[i].dayNumber ||
+              (draft[i].dayNumber === latePeriod.startDay - 1 && day.dayNumber < uncompletedPeriod.startDay);
+          } else if (day.dayNumber < uncompletedPeriod.startDay) {
+            filled =
+              draft[i].dayNumber > uncompletedPeriod.startDay ||
+              (draft[i].dayNumber < sortedPeriods[0].startDay && draft[i].dayNumber <= day.dayNumber);
+            isLast = day.dayNumber === draft[i].dayNumber;
+          } else {
+            filled = draft[i].dayNumber > uncompletedPeriod.startDay && draft[i].dayNumber <= day.dayNumber;
+            isLast = day.dayNumber === draft[i].dayNumber;
+          }
+
+          draft[i].filled = filled;
+
+          if (filled) {
+            draft[i].isLast = isLast;
+          }
+        }
+
+        if (day && !day.selected) {
+          draft[i].hover = !uncompletedPeriod && day.dayNumber === draft[i].dayNumber;
+        }
       }
     });
 
@@ -114,27 +162,22 @@ export class SettingsState implements NgxsOnInit {
   public selectDay(ctx: StateContext<SettingsStateModel>, { day }: SelectDay) {
     const { periods, days } = ctx.getState();
 
-    if (day.selected && !!periods[periods.length - 1].endDay) {
+    if (day.selected && !!periods.length && !!periods[periods.length - 1].endDay) {
       return;
     }
 
     const newPeriods = produce(periods, draft => {
-      if (!periods.length || !!periods[periods.length - 1].endDay) {
+      if (!periods.length || (!!periods.length && !!periods[periods.length - 1].endDay)) {
         draft.push({
           startDay: day.dayNumber,
           income: [],
-          expense: [],
-          color: DAY_COLORS[Math.floor(Math.random() * 6)]
+          expense: []
         });
       } else {
         let sortedPeriods = [...periods];
-        sortedPeriods = sortedPeriods.sort((period, comperedPeriod) => {
-          if (period.startDay > comperedPeriod.startDay) {
-            return 1;
-          } else {
-            return -1;
-          }
-        });
+        sortedPeriods = sortedPeriods.sort((period, comparedPeriod) =>
+          period.startDay > comparedPeriod.startDay ? 1 : -1
+        );
 
         const latePeriod = sortedPeriods.find(({ startDay }) => startDay > draft[periods.length - 1].startDay);
         let endDay: number;
@@ -160,8 +203,6 @@ export class SettingsState implements NgxsOnInit {
     });
 
     const newDays = produce(days, draft => {
-      let colorIndex = 0;
-
       for (let i = 0; i < draft.length; i++) {
         const period = newPeriods[newPeriods.length - 1];
 
@@ -171,8 +212,7 @@ export class SettingsState implements NgxsOnInit {
             periodIndex: newPeriods.length - 1,
             isFirst: true,
             isLast: false,
-            selected: true,
-            color: period.color
+            selected: true
           };
 
           return;
@@ -183,15 +223,12 @@ export class SettingsState implements NgxsOnInit {
           (period.startDay > period.endDay &&
             (draft[i].dayNumber >= period.startDay || draft[i].dayNumber <= period.endDay))
         ) {
-          colorIndex = colorIndex === DAY_COLORS.length - 1 ? 0 : colorIndex;
-
           draft[i] = {
             ...draft[i],
             periodIndex: newPeriods.length - 1,
             isFirst: draft[i].dayNumber === period.startDay,
             isLast: draft[i].dayNumber === period.endDay,
-            selected: true,
-            color: period.color
+            selected: true
           };
         }
       }
