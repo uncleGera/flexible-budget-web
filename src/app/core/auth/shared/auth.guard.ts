@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, RouterStateSnapshot } from '@angular/router';
-import { LoginRedirect } from '@app/core/auth/state/auth.actions';
+import { SignInRedirect } from '@app/core/auth/state/auth.actions';
 import { AuthState } from '@app/core/auth/state/auth.state';
 import { Store } from '@ngxs/store';
 
@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     const user = this.store.selectSnapshot(AuthState.user);
 
     if (!user) {
-      this.store.dispatch(new LoginRedirect());
+      this.store.dispatch(new SignInRedirect());
       return false;
     }
 

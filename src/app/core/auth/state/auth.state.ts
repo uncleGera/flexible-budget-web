@@ -6,7 +6,16 @@ import { throwError } from 'rxjs';
 import { catchError, filter, tap } from 'rxjs/operators';
 
 import { AuthService } from '../shared/auth.service';
-import { CheckSession, Login, LoginFailed, LoginRedirect, LoginSuccess, Logout, RemoveUser } from './auth.actions';
+import {
+  CheckSession,
+  Logout,
+  RemoveUser,
+  SignIn,
+  SignInFailed,
+  SignInRedirect,
+  SignInSuccess,
+  SignUp
+} from './auth.actions';
 import { AuthStateModel } from './auth.model';
 
 @State<AuthStateModel>({
@@ -44,7 +53,7 @@ export class AuthState implements NgxsOnInit {
     const { user } = ctx.getState();
 
     if (!user) {
-      ctx.dispatch(new LoginRedirect());
+      ctx.dispatch(new SignInRedirect());
       return;
     }
 
@@ -56,15 +65,30 @@ export class AuthState implements NgxsOnInit {
     );
   }
 
-  @Action(Login)
-  public login(ctx: StateContext<AuthStateModel>, { params }: Login) {
+  @Action(SignIn)
+  public signIn(ctx: StateContext<AuthStateModel>, { params }: SignIn) {
     ctx.patchState({ loading: true });
 
     return this.authService.login(params).pipe(
       filter(user => !!user),
-      tap((user: IUser) => ctx.dispatch(new LoginSuccess(user))),
+      tap((user: IUser) => ctx.dispatch(new SignInSuccess(user))),
       catchError((errors: IError[]) => {
-        ctx.dispatch(new LoginFailed(errors));
+        ctx.dispatch(new SignInFailed(errors));
+        return throwError(errors);
+      })
+    );
+  }
+
+  @Action(SignUp)
+  public signUp(ctx: StateContext<AuthStateModel>, { params }: SignUp) {
+    ctx.patchState({ loading: true });
+
+    return this.authService.login(params).pipe(
+      filter(user => !!user),
+      tap((user: IUser) => ctx.dispatch(new SignInSuccess(user))),
+      catchError((errors: IError[]) => {
+        this.snackBar.open('Не удалось зарегистрироваться');
+        ctx.patchState({ loading: false });
         return throwError(errors);
       })
     );
@@ -73,7 +97,7 @@ export class AuthState implements NgxsOnInit {
   @Action(Logout)
   public logout(ctx: StateContext<AuthStateModel>) {
     this.snackBar.open('До свидания!');
-    ctx.dispatch([new RemoveUser(), new LoginRedirect()]);
+    ctx.dispatch([new RemoveUser(), new SignInRedirect()]);
   }
 
   @Action(RemoveUser)
@@ -84,24 +108,24 @@ export class AuthState implements NgxsOnInit {
   /**
    * Events
    */
-  @Action(LoginRedirect)
-  public onLoginRedirect(ctx: StateContext<AuthStateModel>) {
+  @Action(SignInRedirect)
+  public onSignInRedirect(ctx: StateContext<AuthStateModel>) {
     ctx.dispatch(new Navigate(['/auth/sign-in']));
   }
 
-  @Action(LoginSuccess)
-  public onLoginSuccess(ctx: StateContext<AuthStateModel>) {
+  @Action(SignInSuccess)
+  public onSignInSuccess(ctx: StateContext<AuthStateModel>) {
     this.snackBar.open('Добро пожаловать!');
     ctx.dispatch(new Navigate(['/']));
   }
 
-  @Action(LoginSuccess)
-  public setUserStateOnSuccess(ctx: StateContext<AuthStateModel>, { user }: LoginSuccess) {
+  @Action(SignInSuccess)
+  public setUserStateOnSuccess(ctx: StateContext<AuthStateModel>, { user }: SignInSuccess) {
     ctx.patchState({ user, loading: false });
   }
 
-  @Action(LoginFailed)
-  public onLoginFailed(ctx: StateContext<AuthStateModel>, { errors }: LoginFailed) {
+  @Action(SignInFailed)
+  public onSignInFailed(ctx: StateContext<AuthStateModel>, { errors }: SignInFailed) {
     this.snackBar.open('Не удалось войти');
     ctx.patchState({ loading: false });
     ctx.dispatch(new RemoveUser());

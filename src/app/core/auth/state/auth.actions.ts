@@ -2,8 +2,13 @@ import { ISessionParams } from '@app/modules/session/shared';
 import { IError, IUser } from '@lib/interfaces';
 
 // Actions
-export class Login {
-  public static readonly type = '[Auth] Login';
+export class SignIn {
+  public static readonly type = '[Auth] SignIn';
+  constructor(public readonly params: ISessionParams) {}
+}
+
+export class SignUp {
+  public static readonly type = '[Auth] SignUp';
   constructor(public readonly params: ISessionParams) {}
 }
 
@@ -20,16 +25,16 @@ export class RemoveUser {
 }
 
 // Events
-export class LoginRedirect {
-  public static readonly type = '[Auth] LoginRedirect';
+export class SignInRedirect {
+  public static readonly type = '[Auth] SignInRedirect';
 }
 
-export class LoginSuccess {
-  public static readonly type = '[Auth] LoginSuccess';
+export class SignInSuccess {
+  public static readonly type = '[Auth] SignInSuccess';
   constructor(public readonly user: IUser) {}
 }
 
-export class LoginFailed {
-  public static readonly type = '[Auth] LoginFailed';
+export class SignInFailed {
+  public static readonly type = '[Auth] SignInFailed';
   constructor(public readonly errors: IError[]) {}
 }

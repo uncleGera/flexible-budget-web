@@ -7,10 +7,10 @@ import { Observable } from 'rxjs';
 import { ISessionParams } from '../../shared';
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.page.html'
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.page.html'
 })
-export class SignInPage {
+export class SignUpPage {
   @Select(AuthState.loading)
   public loading$: Observable<boolean>;
 

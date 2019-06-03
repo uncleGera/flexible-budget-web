@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { forwardRef, NgModule } from '@angular/core';
 import {
   MAT_DATE_LOCALE,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
@@ -21,6 +22,7 @@ import {
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatRadioModule,
+  MatRippleModule,
   MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
@@ -29,8 +31,7 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule,
-  MatRippleModule
+  MatTooltipModule
 } from '@angular/material';
 
 import { TranslatablePaginator } from './translatable-paginator.service';
@@ -79,6 +80,10 @@ const MODULES = [
     {
       provide: MAT_DATE_LOCALE,
       useValue: 'ru'
+    },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: { duration: 3000 }
     }
   ]
 })

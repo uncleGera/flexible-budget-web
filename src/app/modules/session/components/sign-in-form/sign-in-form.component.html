@@ -2,9 +2,9 @@
   <mat-form-field appearance="outline" class="session__form-field">
     <mat-label>Email</mat-label>
 
-    <input matInput placeholder="Введите Email" type="email" formControlName="email" />
+    <input matInput placeholder="Введите Email" type="email" formControlName="email" required />
 
-    <mat-error *ngIf="form.get('email').hasError('required')" class="mat-text-warn">
+    <mat-error *ngIf="form.get('email').hasError('required')">
       Пожалуйста, введите Email
     </mat-error>
   </mat-form-field>
@@ -12,14 +12,14 @@
   <mat-form-field appearance="outline" class="session__form-field">
     <mat-label>Пароль</mat-label>
 
-    <input matInput type="password" placeholder="Введите пароль" formControlName="password" />
+    <input matInput type="password" placeholder="Введите пароль" formControlName="password" required />
 
-    <mat-error *ngIf="form.get('password').hasError('required')" class="mat-text-warn">
+    <mat-error *ngIf="form.get('password').hasError('required')">
       Пожалуйста, введите пароль
     </mat-error>
   </mat-form-field>
 
-  <button mat-flat-button type="submit" color="primary" [disabled]="loading" class="button">
+  <button mat-flat-button type="submit" color="primary" [disabled]="loading" class="button session__button">
     Войти
   </button>
 </form>

@@ -9,18 +9,18 @@
           <div>Flexible Budget</div>
         </div>
 
-        <p class="session__account-text">Еще нет аккаунта?</p>
+        <p class="session__account-text">Уже зарегистрированы?</p>
       
-        <button mat-stroked-button [routerLink]="['../sign-up']" type="button" color="accent" class="button">
-          Зарегистрироваться
+        <button mat-stroked-button [routerLink]="['../sign-in']" type="button" color="accent" class="button">
+          Войти
         </button>
       </div>
 
-      <app-sign-in-form
+      <app-sign-up-form
         [loading]="loading$ | async"
         (submitted)="onSubmit($event)"
         class="session__form"
-      ></app-sign-in-form>
+      ></app-sign-up-form>
     </mat-card-content>
   </mat-card>
 </div>

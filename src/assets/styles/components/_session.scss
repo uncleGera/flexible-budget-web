@@ -6,31 +6,74 @@
   justify-content: center;
   position: relative;
 
-  &__content {
-    width: 270px;
+  &__card {
+    &.mat-card {
+      padding-top: 24px;
+    }
 
     @media #{$mobile-screen-sm-min} {
       margin-bottom: 100px;
     }
   }
 
-  &__header {
-    color: #444;
-    font-size: 25px;
-    font-weight: 300;
-    padding-top: 4px;
-    text-align: center;
+  &__content {
+    &.mat-card-content {
+      display: flex;
+    }
+  }
+
+  &__aside {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 16px;
+    padding-right: 16px;
+    position: relative;
+
+    &:after {
+      background: linear-gradient(transparentize($primary-color, 1) 0%, transparentize($primary-color, 0.5) 50%, transparentize($primary-color, 1) 100%);
+      content: '';
+      height: 100%;
+      position: absolute;
+      right: 0;
+      width: 2px;
+    }
+  }
+
+  &__logo {
+    align-items: center;
+    color: $primary-color;
+    display: flex;
+    font-family: 'Dosis', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin-bottom: auto;
+    padding: 40px 16px 0;
     text-transform: uppercase;
 
-    &_small {
-      font-size: 22px;
-      font-weight: 400;
-      text-transform: none;
+    mat-icon {
+      font-size: 32px;
+      height: 32px;
+      margin-right: 4px;
+      width: 32px;
     }
+  }
+
+  &__form {
+    width: 270px;
+  }
+
+  &__account-text {
+    text-align: center;
   }
 
   &__form-field {
     width: 100%;
+  }
+
+  &__button.mat-flat-button {
+    margin-top: 4px;
   }
 }
 

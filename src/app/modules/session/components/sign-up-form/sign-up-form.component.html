@@ -1,0 +1,53 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="session__form-field">
+    <mat-label>Email</mat-label>
+
+    <input matInput placeholder="Введите Email" type="email" formControlName="email" required />
+
+    <mat-error *ngIf="form.get('email').hasError('required')">
+      Пожалуйста, введите Email
+    </mat-error>
+
+    <mat-error *ngIf="form.get('email').hasError('email')">
+      Пожалуйста, введите корректный Email
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="session__form-field">
+    <mat-label>Пароль</mat-label>
+
+    <input matInput type="password" placeholder="Введите пароль" formControlName="password" required />
+
+    <mat-error *ngIf="form.get('password').hasError('required')">
+      Пожалуйста, введите пароль
+    </mat-error>
+
+    <mat-error *ngIf="form.get('password').hasError('minlength')">
+      Пароль должен быть не короче {{ MIN_PASSWORD_LENGTH }} символов
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="session__form-field">
+    <mat-label>Подтверждение пароля</mat-label>
+
+    <input
+      matInput
+      type="password"
+      placeholder="Введите пароль еще раз"
+      formControlName="passwordConfirmation"
+      required
+    />
+
+    <mat-error *ngIf="form.get('passwordConfirmation').hasError('required')">
+      Пожалуйста, введите пароль еще раз
+    </mat-error>
+
+    <mat-error *ngIf="form.get('passwordConfirmation').hasError('matchPassword')">
+      Пароли не совпадают
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-flat-button type="submit" color="primary" [disabled]="loading" class="button session__button">
+    Зарегистрироваться
+  </button>
+</form>

@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SignInPage } from './pages/sign-in/sign-in.page';
+import { SignInPage, SignUpPage } from './pages';
 
 const routes: Routes = [
   {
     path: 'sign-in',
     component: SignInPage
+  },
+  {
+    path: 'sign-up',
+    component: SignUpPage
   }
 ];
 
