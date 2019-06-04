@@ -4,8 +4,8 @@
   </mat-card-title>
 
   <mat-card-subtitle>
-    Пожалуйста, создайте один или несколько отчетных периодов, выберав поочередно даты начала и окончания.
-    Затем кликните по каждому периоду и введите доходы и расходы.
+    Пожалуйста, создайте один или несколько отчетных периодов, выберав поочередно даты начала и окончания. Затем
+    кликните по каждому периоду и введите доходы и расходы.
   </mat-card-subtitle>
 
   <app-periods-calendar
@@ -14,3 +14,20 @@
     (daySelected)="onDaySelected($event)"
   ></app-periods-calendar>
 </mat-card>
+
+<mat-sidenav
+  #sidebar
+  position="end"
+  disableClose
+  fixedInViewport
+  mode="side"
+  fixedTopGap="56"
+  class="settings-sidebar scrollbar"
+>
+  <ng-container *ngIf="selectedPeriod$ | async as period">
+    <div class="settings-sidebar__header">
+      <div>Выбран период: с {{ period.startDay }} по {{ period.endDay }} числа</div>
+      <button mat-icon-button (click)="closeSidebar()"><mat-icon>close</mat-icon></button>
+    </div>
+  </ng-container>
+</mat-sidenav>

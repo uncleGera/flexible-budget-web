@@ -1,4 +1,4 @@
-import { ISettingsDay } from '../shared';
+import { ISettingsDay, ISettingsPeriod } from '../shared';
 
 // Actions
 export class FetchPeriod {
@@ -13,4 +13,9 @@ export class SetHover {
 export class SelectDay {
   public static readonly type = '[Settings] SelectDay';
   constructor(public readonly day: ISettingsDay) {}
+}
+
+export class SelectPeriod {
+  public static readonly type = '[Settings] SelectPeriod';
+  constructor(public readonly selectedPeriod: ISettingsPeriod) {}
 }

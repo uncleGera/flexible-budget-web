@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, Output } from '@angular/core';
-import { Actions, Select, Store } from '@ngxs/store';
+import { AfterViewInit, Component, EventEmitter, Output } from '@angular/core';
+import { Select } from '@ngxs/store';
 import { IMoneyFlow, ITableData } from 'libs/interfaces';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { IDay } from '../../shared';
 import { DashboardState } from '../../state';
@@ -11,7 +11,7 @@ import { DashboardState } from '../../state';
   templateUrl: './days.component.html',
   styleUrls: ['./days.component.scss']
 })
-export class DaysTableComponent implements AfterViewInit, OnDestroy {
+export class DaysTableComponent implements AfterViewInit {
   @Select(DashboardState.days)
   public days$: Observable<ITableData<IDay>>;
 
@@ -26,15 +26,7 @@ export class DaysTableComponent implements AfterViewInit, OnDestroy {
 
   public columnsToDisplay = ['date', 'moneyFlows', 'dailyBudget', 'totalCost', 'balance'];
 
-  private $unsubscribe: Subject<any> = new Subject();
-
-  constructor(private store: Store, private actions: Actions) {}
-
   public ngAfterViewInit() {}
-
-  public ngOnDestroy() {
-    this.$unsubscribe.next();
-  }
 
   public addMoneyFlow(dayId: number) {
     this.add.emit(dayId);

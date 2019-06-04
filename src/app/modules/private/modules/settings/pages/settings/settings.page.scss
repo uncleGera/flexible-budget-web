@@ -1,3 +1,33 @@
+@import '~assets/styles/variables';
+
 .settings {
   max-width: 700px;
+}
+
+.settings-sidebar {
+  background: #fff;
+  border-left-width: 0 !important;
+  box-shadow: 0 7px 8px rgba(0, 0, 0, 0.14), 0 5px 22px rgba(0, 0, 0, 0.1), 0 12px 17px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  z-index: 1000 !important;
+
+  @media #{$tablet-screen-sm-min} {
+    width: 500px;
+  }
+
+  &__header {
+    align-items: center;
+    background: $accent-color;
+    color: #fff;
+    display: flex;
+    font-size: 20px;
+    font-weight: 500;
+    justify-content: space-between;
+    letter-spacing: 0.15px;
+    padding: 16px;
+
+    @media #{$tablet-screen-sm-min} {
+      padding: 24px 16px 24px 24px;
+    }
+  }
 }

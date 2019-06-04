@@ -1,18 +1,15 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { IMoneyFlow } from 'libs/interfaces';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-money-flow-dialog',
   templateUrl: './money-flow-dialog.component.html'
 })
-export class MoneyFlowDialogComponent implements OnInit, OnDestroy {
+export class MoneyFlowDialogComponent implements OnInit {
   public form: FormGroup;
   public isEdit = false;
-
-  private $unsubscribe: Subject<any> = new Subject();
 
   constructor(
     public dialogRef: MatDialogRef<MoneyFlowDialogComponent>,
@@ -26,10 +23,6 @@ export class MoneyFlowDialogComponent implements OnInit, OnDestroy {
       description: this.data.description || '',
       amount: this.data.amount || null
     });
-  }
-
-  public ngOnDestroy() {
-    this.$unsubscribe.next();
   }
 
   public onSubmit() {

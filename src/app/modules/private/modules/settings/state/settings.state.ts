@@ -3,13 +3,14 @@ import produce from 'immer';
 import { tap } from 'rxjs/operators';
 
 import { ISettingsDay, ISettingsPeriod, SettingsService } from '../shared';
-import { FetchPeriod, SelectDay, SetHover } from './settings.actions';
+import { FetchPeriod, SelectDay, SelectPeriod, SetHover } from './settings.actions';
 import { SettingsStateModel } from './settings.model';
 
 @State<SettingsStateModel>({
   name: 'settings',
   defaults: {
     periods: [],
+    selectedPeriod: null,
     days: null
   }
 })
@@ -22,6 +23,11 @@ export class SettingsState implements NgxsOnInit {
   @Selector()
   public static days({ days }: SettingsStateModel): ISettingsDay[] {
     return days;
+  }
+
+  @Selector()
+  public static selectedPeriod({ selectedPeriod }: SettingsStateModel): ISettingsPeriod {
+    return selectedPeriod;
   }
 
   /**
@@ -162,6 +168,10 @@ export class SettingsState implements NgxsOnInit {
   public selectDay(ctx: StateContext<SettingsStateModel>, { day }: SelectDay) {
     const { periods, days } = ctx.getState();
 
+    if (day.selected) {
+      ctx.dispatch(new SelectPeriod(periods[day.periodIndex]));
+    }
+
     if (day.selected && !!periods.length && !!periods[periods.length - 1].endDay) {
       return;
     }
@@ -235,5 +245,10 @@ export class SettingsState implements NgxsOnInit {
     });
 
     ctx.patchState({ periods: newPeriods, days: newDays });
+  }
+
+  @Action(SelectPeriod)
+  public selectPeriod(ctx: StateContext<SettingsStateModel>, { selectedPeriod }: SelectPeriod) {
+    ctx.patchState({ selectedPeriod });
   }
 }
